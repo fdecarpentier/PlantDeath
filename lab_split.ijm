@@ -24,7 +24,7 @@ for(i=0; i<list.length; i++)
 {
 	//Open the images
 	imgPath=inputFolder+list[i];
-	if(endsWith(imgPath, ".jpg") || endsWith(imgPath, ".tif")) open(imgPath);
+	if(endsWith(imgPath, ".jpg")|endsWith(imgPath, ".tif")) open(imgPath);
 
 	run("Set Scale...", "distance="+ disPix+ " known="+ disKnown);
 
