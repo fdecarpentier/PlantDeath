@@ -24,7 +24,7 @@ for(i=0; i<list.length; i++)
 {
 	//Open the images
 	imgPath=inputFolder+list[i];
-	if(endsWith(imgPath, ".jpg")) open(imgPath);
+	if(endsWith(imgPath, ".jpg") || endsWith(imgPath, ".tif")) open(imgPath);
 
 	run("Set Scale...", "distance="+ disPix+ " known="+ disKnown);
 
@@ -35,14 +35,13 @@ for(i=0; i<list.length; i++)
 		//The following two lines removes the file extension
 		fileExtension=lastIndexOf(outputPath,"."); 
 		if(fileExtension!=-1) outputPath=substring(outputPath,0,fileExtension);
-		run("Duplicate...", " "); 
 		getRoi();
 		selectWindow(list[i]);
 		getB();
 		getGrey();	
 		for (row = currentNResults; row < nResults; row++) //This add the file name in a row 
 		{
-		setResult("Label", row, list[i]);
+			setResult("Label", row, list[i]);
 		}
 	}
 	showProgress(i, list.length);  //Shows a progress bar  
@@ -55,11 +54,9 @@ close("*");
 
 function getRoi()
 {
-	run("Set Scale...", "distance="+ disPix+ " known="+ disKnown);
-	open(imgPath);
 	run("Duplicate...", " ");
 	run("8-bit");
-	run("Gaussian Blur...", "sigma=1.5"); //Blur the particles to be sure to select the objects and not the sub-objects
+	run("Gaussian Blur...", "sigma=2"); //Blur the particles to be sure to select the objects and not the sub-objects
 	setAutoThreshold("Default");
 	run("Convert to Mask");
 	if(watershed!=false) run("Watershed");
@@ -78,10 +75,13 @@ function getB()
 
 function getGrey()
 {
-	roiManager("Show All without labels"); //transfer the ROI
-	roiManager("Set Color", "ff5def");
+	roiManager("Set Color", "red");
+	roiManager("Show All with labels"); //transfer the ROI
 	roiManager("Measure");
 	run("Flatten");
-	roiManager("Delete");
 	saveAs("Jpg", outputPath+ watershedLabel+ "_LAB_b.jpg");
+	open(imgPath); //Improve here so we don't have to open the image again
+	roiManager("Show All without labels"); //transfer the ROI
+	saveAs("Jpg", outputPath+ watershedLabel+ ".jpg");
+	roiManager("Delete");
 }
