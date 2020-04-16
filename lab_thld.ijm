@@ -1,24 +1,37 @@
 inputFolder=getDirectory("Choose input folder");
 //outputFolder=getDirectory("Choose output folder for the results");
+list=getFileList(inputFolder);
 
-imgPath=inputFolder+"eb.tif"
-
-run("Clear Results"); 
 run("Set Measurements...", "area mean min redirect=None decimal=4");
-open(imgPath);
-run("Duplicate...", " ");
-getRoi();
-selectWindow("eb.tif");
-getBBolean();
-getGrey(); 
+
+for(i=0; i<list.length; i++)
+{
+	run("Clear Results");
+	imgPath=inputFolder+list[i]; 
+	open(imgPath);
+	print(imgPath);
+	if(nImages>=1)
+	{
+		run("Duplicate...", " ");
+		rename(list[i]+"_ori");
+		run("Duplicate...", " ");
+		getRoi();
+		selectWindow(list[i]);
+		getBBolean();
+		getMes(); 
+		selectWindow(list[i]+"_ori");
+		roiManager("Show All");
+		roiManager("Delete");
+	}
+}
 
 function getRoi()
 {
 	run("8-bit");
-	run("Gaussian Blur...", "sigma=1.5"); //Blur the particles to be sure to select the objects and not the sub-objects
+	run("Gaussian Blur...", "sigma=2"); //Blur the particles to be sure to select the objects and not the sub-objects
 	setAutoThreshold("Default");
 	run("Convert to Mask");
-	run("Watershed");
+	//run("Watershed");
 	run("Fill Holes");
 	run("Analyze Particles...","size=0-Infinity add");
 }
@@ -76,9 +89,19 @@ function getBBolean()
 	rename(a);
 }
 
-function getGrey()
+function getMes()
 {
-	roiManager("Show All without labels"); //transfer the ROI
-	roiManager("Set Color", "ff5def"); 
 	roiManager("Measure");
+	roiManager("Deselect");
+	roiManager("Set Color", "Red");  
+	for (iRow =0; iRow < nResults; iRow++)
+	{
+		meanParticle=getResult("Mean", iRow);
+		if (meanParticle>30)
+		{
+			roiManager("Select", iRow); 
+			roiManager("Set Color", "Green"); 
+		}
+	}
+	roiManager("Show All"); 
 }
