@@ -1,3 +1,4 @@
+//waitForUser("Text");
 //as directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
 outputFolder=getDirectory("Choose output folder for the results");
@@ -19,7 +20,6 @@ if(watershed!=false) watershedLabel="_ws";
 run("Clear Results"); 
 run("Set Measurements...", "area mean min redirect=None decimal=4");
 setBatchMode(true);
-
 for(i=0; i<list.length; i++)
 {
 	//Open the images
@@ -61,6 +61,8 @@ function getRoi()
 	run("Convert to Mask");
 	if(watershed!=false) run("Watershed");
 	run("Fill Holes");
+	run("Erode");
+	run("Dilate");
 	run("Analyze Particles...","size=0-Infinity add");
 }
 
