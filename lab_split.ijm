@@ -6,7 +6,7 @@ list=getFileList(inputFolder);
 
 //Create an otion dialog box
 Dialog.create("Options");
-Dialog.addNumber("Distance in pixels", 1);
+Dialog.addNumber("Distance in pixels", 2.85);
 Dialog.addNumber("Known distance", 1);
 Dialog.addCheckbox("Activate Watershed", false);
 Dialog.show();

@@ -1,32 +1,47 @@
 inputFolder=getDirectory("Choose input folder");
-//outputFolder=getDirectory("Choose output folder for the results");
+outputFolder=getDirectory("Choose output folder for the results");
 list=getFileList(inputFolder);
 
 run("Set Measurements...", "area mean min redirect=None decimal=4");
-
+run("Clear Results");
 for(i=0; i<list.length; i++)
 {
-	run("Clear Results");
 	imgPath=inputFolder+list[i]; 
 	open(imgPath);
-	print(imgPath);
+	outputPath=outputFolder+list[i];
+	fileExtension=lastIndexOf(outputPath,"."); 
+	if(fileExtension!=-1) outputPath=substring(outputPath,0,fileExtension);
 	if(nImages>=1)
 	{
-		run("Duplicate...", " ");
-		rename(list[i]+"_ori");
-		run("Duplicate...", " ");
+		currentNResults = nResults;
 		getRoi();
 		selectWindow(list[i]);
 		getBBolean();
 		getMes(); 
+		for (row = currentNResults; row < nResults; row++) //This add the file name in a row 
+		{
+			setResult("Label", row, list[i]);
+		}
 		selectWindow(list[i]+"_ori");
-		roiManager("Show All");
+		roiManager("Show All without labels"); 
+		run("Flatten");
+		saveAs("Tiff", outputPath+".tiff");
 		roiManager("Delete");
+		run("Close");
+		close("*");
 	}
+
+	showProgress(i, list.length);  //Shows a progress bar 
 }
+saveAs("results", outputFolder+ "results.csv"); 
+selectWindow("Results");
+run("Close"); 
 
 function getRoi()
 {
+	run("Duplicate...", " ");
+	rename(list[i]+"_ori");
+	run("Duplicate...", " ");
 	run("8-bit");
 	run("Gaussian Blur...", "sigma=2"); //Blur the particles to be sure to select the objects and not the sub-objects
 	setAutoThreshold("Default");
@@ -55,6 +70,7 @@ function getBBolean()
 	a=getTitle();
 	call("ij.plugin.frame.ColorThresholder.RGBtoLab");
 	run("RGB Stack");
+	run("Gaussian Blur...", "sigma=2"); //Blur the particles to be sure to select the objects and not the sub-objects
 	run("Convert Stack to Images");
 	selectWindow("Red");
 	rename("0");
@@ -94,14 +110,16 @@ function getMes()
 	roiManager("Measure");
 	roiManager("Deselect");
 	roiManager("Set Color", "Red");  
-	for (iRow =0; iRow < nResults; iRow++)
+	for (iRow = 0; iRow < nResults-currentNResults; iRow++)
 	{
-		meanParticle=getResult("Mean", iRow);
+		meanParticle=getResult("Mean", iRow+currentNResults);
 		if (meanParticle>30)
 		{
 			roiManager("Select", iRow); 
 			roiManager("Set Color", "Green"); 
 		}
 	}
-	roiManager("Show All"); 
+	roiManager("Show All without labels"); 
+	run("Flatten");
+	saveAs("Tiff", outputPath+"_LAB_b.tiff");
 }
