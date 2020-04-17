@@ -3,7 +3,7 @@ This macros allows quantification of celle death in plant cells stained with Eva
 Exanples with Chlamydomonas cells.
 
 ## Original
-![original](./input/1.jpg)
+![original](./input/eb.jpg)
 
 ## Threshold
 ![threshold_LAB_b](./output/eb_thld_LAB_b.jpg)
