@@ -1,5 +1,5 @@
 # PlantDeath
-This macros allows quantification of celle death in plant cells stained with Evans Blue. 
+This macros allows quantification of cell death in plants stained with Evans Blue.
 Examples with Chlamydomonas cells.
 
 ## Original
