@@ -1,41 +1,65 @@
+//Choose directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
 outputFolder=getDirectory("Choose output folder for the results");
 list=getFileList(inputFolder);
 
+//Create an option dialog box
+Dialog.create("Options");
+Dialog.addNumber("Distance in pixels", 2.85);
+Dialog.addNumber("Known distance", 1);
+Dialog.addNumber("Minimum area (unit"+fromCharCode(0x00B2)+")", 10);
+Dialog.addCheckbox("Activate Watershed", false);
+Dialog.show();
+disPix = Dialog.getNumber();
+disKnown = Dialog.getNumber();
+minArea = Dialog.getNumber();
+watershed = Dialog.getCheckbox();
+
+//Set a watershed label for the output names
+watershedLabel = ""; 
+if(watershed!=false) watershedLabel="_ws";
+
+//Choose what you need to measure
 run("Set Measurements...", "area mean min redirect=None decimal=4");
 run("Clear Results");
+
+//Processing loop of the images
 for(i=0; i<list.length; i++)
 {
-	imgPath=inputFolder+list[i]; 
+	//Open image
+	imgPath=inputFolder+list[i];
 	open(imgPath);
+	//Setup outup path
 	outputPath=outputFolder+list[i];
 	fileExtension=lastIndexOf(outputPath,"."); 
 	if(fileExtension!=-1) outputPath=substring(outputPath,0,fileExtension);
+	//Set scale according to user inputs
+	run("Set Scale...", "distance="+ disPix+ " known="+ disKnown);
 	if(nImages>=1)
 	{
-		currentNResults = nResults;
-		getRoi();
+		currentNResults = nResults; //Save the numer of the last result
+		getRoi(); //Add all the particles to the ROI manager
 		selectWindow(list[i]);
-		getBBolean();
-		getMes(); 
-		for (row = currentNResults; row < nResults; row++) //This add the file name in a row 
+		getBBolean(); //Creates a mask with LAB-b* channel (green particles)
+		getMes(); //Measure the values of all particles and creates green/red overlay
+		//Add the file name in each row 
+		for (row = currentNResults; row < nResults; row++)
 		{
-			setResult("Label", row, list[i]);
+			setResult("Image", row, list[i]);
 		}
+		//Transfer the ROI overlay to the original image and save
 		selectWindow(list[i]+"_ori");
 		roiManager("Show All without labels"); 
 		run("Flatten");
-		saveAs("Tiff", outputPath+".tiff");
-		roiManager("Delete");
-		run("Close");
-		close("*");
+		saveAs("Tiff", outputPath+watershedLabel+".tiff");
+		roiManager("Delete"); //Clear the ROI manager
+		close("*"); //Close all images
 	}
-
 	showProgress(i, list.length);  //Shows a progress bar 
 }
-saveAs("results", outputFolder+ "results.csv"); 
-selectWindow("Results");
-run("Close"); 
+saveAs("results", outputFolder+ "results.csv"); //Save results
+selectWindow("Results"); run("Close"); 
+selectWindow("ROI Manager"); run("Close"); 
 
 function getRoi()
 {
@@ -46,18 +70,9 @@ function getRoi()
 	run("Gaussian Blur...", "sigma=2"); //Blur the particles to be sure to select the objects and not the sub-objects
 	setAutoThreshold("Default");
 	run("Convert to Mask");
-	//run("Watershed");
+	if(watershed!=false) run("Watershed");
 	run("Fill Holes");
-	run("Analyze Particles...","size=0-Infinity add");
-}
-
-function getB()
-{
-	run("RGB to CIELAB");
-	for(i=0;i<2;i++)
-	{
-		run("Delete Slice");
-	}
+	run("Analyze Particles...","size="+minArea+"-Infinity add");
 }
 
 function getBBolean()
@@ -121,5 +136,5 @@ function getMes()
 	}
 	roiManager("Show All without labels"); 
 	run("Flatten");
-	saveAs("Tiff", outputPath+"_LAB_b.tiff");
+	saveAs("Tiff", outputPath+watershedLabel+"_LAB_b.tiff");
 }
