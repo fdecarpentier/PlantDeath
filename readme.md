@@ -1,7 +1,7 @@
 # PlantDeath
 This macros allows quantification of cell death in plants stained with Evans Blue.
 Examples with Chlamydomonas cells. 
-It is based on the transformation from RGB to CIELAB images and selection of the b* channel. 
+It is based on the transformation from RGB to CIE L/*a/*b/* images and selection of the b* channel. 
 ![CIELAB](./CIELAB.png)
 IT ONLY WORKS WITH FIJI, NOT IMAGE J.
 
