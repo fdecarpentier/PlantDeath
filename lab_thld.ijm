@@ -105,22 +105,25 @@ function getBBolean()
 	min[2]=140;
 	max[2]=255;
 	filter[2]="pass";
-	for (i=0;i<3;i++){
-	  selectWindow(""+i);
-	  setThreshold(min[i], max[i]);
-	  run("Convert to Mask");
-	  if (filter[i]=="stop")  run("Invert");
+	for (i=0;i<3;i++)
+	{
+		selectWindow(""+i);
+		setThreshold(min[i], max[i]);
+		run("Convert to Mask");
+		if (filter[i]=="stop")  run("Invert");
 	}
 	imageCalculator("AND create", "0","1");
 	imageCalculator("AND create", "Result of 0","2");
-	for (i=0;i<3;i++){
-	  selectWindow(""+i);
-	  close();
+	for (i=0;i<3;i++)
+	{
+		selectWindow(""+i);
+		close();
 	}
 	selectWindow("Result of 0");
 	close();
 	selectWindow("Result of Result of 0");
 	rename(a);
+	run("Fill Holes");
 }
 
 function getMes()
