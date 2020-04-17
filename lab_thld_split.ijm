@@ -1,3 +1,7 @@
+///////////////////////////////////////////////////
+//MACRO NOT FINISHED, ADD BATCH PROCESSING SYSTEM//
+///////////////////////////////////////////////////
+
 inputFolder=getDirectory("Choose input folder");
 //outputFolder=getDirectory("Choose output folder for the results");
 
