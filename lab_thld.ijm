@@ -149,8 +149,11 @@ function getMes()
 	saveAs("Jpeg", outputPath+method+watershedLabel+"_LAB_b.jpg");
 }
 
+
 function autoWhite()
 {
+	// Original code by Vytas Bindokas; Oct 2006, Univ. of Chicago
+	// Code modified by Patrice Mascalchi, 2014, Univ. of Cambridge UK
 	run("Select None");
 	origBit = bitDepth;
 	if (bitDepth() != 24) exit("Active image is not RGB");
