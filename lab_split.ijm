@@ -1,3 +1,6 @@
+//Used method
+method="_conti"
+
 //Choose directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
 outputFolder=getDirectory("Choose output folder for the results");
@@ -51,13 +54,13 @@ for(i=0; i<list.length; i++)
 		selectWindow(list[i]);
 		roiManager("Show All without labels"); 
 		run("Flatten");
-		saveAs("Tiff", outputPath+watershedLabel+".tiff");
+		saveAs("Jpeg", outputPath+method+watershedLabel+".jpg");
 		roiManager("Delete"); //Clear the ROI manager
 		close("*"); //Close all images	
 	}
 	showProgress(i, list.length);  //Shows a progress bar  
 }
-saveAs("results", outputFolder+ "results"+ watershedLabel+ ".csv"); 
+saveAs("results", outputFolder+"results"+method+watershedLabel+ ".csv"); 
 selectWindow("Results"); run("Close"); 
 selectWindow("ROI Manager"); run("Close"); 
 
@@ -102,5 +105,5 @@ function getMes()
 	}	
 	roiManager("Show All with labels"); //transfer the ROI
 	run("Flatten");
-	saveAs("Tiff", outputPath+ watershedLabel+ "_LAB_b.tiff");
+	saveAs("Jpeg", outputPath+method+watershedLabel+ "_LAB_b.jpg");
 }
