@@ -103,7 +103,7 @@ function getMes()
 			roiManager("Set Color", "Green"); 
 		}
 	}	
-	roiManager("Show All with labels"); //transfer the ROI
+	roiManager("Show All without labels"); //transfer the ROI
 	run("Flatten");
-	saveAs("Jpeg", outputPath+method+watershedLabel+ "_LAB_b.jpg");
+	saveAs("Jpeg", outputPath+method+watershedLabel+"_LAB_b.jpg");
 }
