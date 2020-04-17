@@ -1,6 +1,6 @@
 # PlantDeath
 This macros allows quantification of cell death in plants stained with Evans Blue.
-Examples with Chlamydomonas cells. It is based on the transformation for RGB image to LAB and selection of the b* channel. 
+Examples with Chlamydomonas cells. It is based on the transformation from RGB to Lab images and selection of the b* channel. 
 
 ## Original
 ![original](./input/eb.jpg)
