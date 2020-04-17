@@ -1,6 +1,6 @@
-# ParticleArea
+# PlantDeath
 This macros allows quantification of celle death in plant cells stained with Evans Blue. 
-Exanples with Chlamydomonas cells.
+Examples with Chlamydomonas cells.
 
 ## Original
 ![original](./input/eb.jpg)
