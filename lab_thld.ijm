@@ -1,5 +1,7 @@
-//Used method
-method="_thld";
+//Macro by Félix de Carpentier, 2020, CNRS / Sorbonne University / Paris-Saclay University, France
+//Inspired by Will Armour, 2018 (https://willarmour.science/how-to-automate-image-particle-analysis-by-creating-a-macro-in-imagej/)
+
+method="_thld"; //Used method
 
 //Choose directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
@@ -36,7 +38,7 @@ for(i=0; i<list.length; i++)
 	//Open image
 	imgPath=inputFolder+list[i];
 	open(imgPath);
-	//Setup outup path
+	//Setup output path
 	outputPath=outputFolder+list[i];
 	fileExtension=lastIndexOf(outputPath,"."); 
 	if(fileExtension!=-1) outputPath=substring(outputPath,0,fileExtension);

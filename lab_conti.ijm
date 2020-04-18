@@ -1,5 +1,7 @@
-//Used method
-method="_conti";
+//Macro by Félix de Carpentier, 2020, CNRS / Sorbonne University / Paris-Saclay University, France
+//Inspired by Will Armour, 2018 (https://willarmour.science/how-to-automate-image-particle-analysis-by-creating-a-macro-in-imagej/)
+
+method="_conti"; //Used method
 
 //Choose directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
@@ -44,7 +46,7 @@ for(i=0; i<list.length; i++)
 	run("Set Scale...", "distance="+ disPix+ " known="+ disKnown);
 	if(nImages>=1) 
 	{
-		currentNResults = nResults; //Save the numer of the last result
+		currentNResults = nResults; //Save the number of the last result
 		if(whiteBalance!=false) autoWhite(); //Ajust automatically the white balance
 		getRoi(); //Add all the particles to the ROI manager
 		selectWindow(whiteBalancelabel+list[i]);
