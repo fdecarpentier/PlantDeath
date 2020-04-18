@@ -9,20 +9,20 @@ It is therfore possible to discimiate them based on theire b\* value.
 - Examples with Chlamydomonas cells. 
 
 ## Original
-![original](./input/eb.jpg)
+![original](./input/1.jpg)
 
 ## Threshold
-![threshold_LAB_b](./output/eb_thld_LAB_b.jpg)
-![threshold](./output/eb_thld.jpg)
-![threshold_LAB_b](./output/3_thld_LAB_b.jpg)
-![threshold](./output/3_thld.jpg)
+![threshold_LAB_b](./output/3_thld_wb_LAB_b.jpg)
+![threshold](./output/3_thld_wb.jpg)
+![threshold_LAB_b](./output/1_thld_wb_LAB_b.jpg)
+![threshold](./output/1_thld_wb.jpg)
 
 
 ## Continuous
-![continuous_LAB_b](./output/eb_conti_LAB_b.jpg)
-![continuous](./output/eb_conti.jpg)
-![continuous_LAB_b](./output/3_conti_LAB_b.jpg)
-![continuous](./output/3_conti.jpg)
+![continuous_LAB_b](./output/3_conti_wb_LAB_b.jpg)
+![continuous](./output/3_conti_wb.jpg)
+![continuous_LAB_b](./output/1_conti_wb_LAB_b.jpg)
+![continuous](./output/1_conti_wb.jpg)
 
 ## Results Table
 Results are tidy! 
