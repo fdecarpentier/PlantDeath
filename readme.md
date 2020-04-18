@@ -9,7 +9,7 @@ It is therfore possible to discimiate them based on theire b\* value.
 - Examples with Chlamydomonas cells. 
 
 ## Original
-![original](./input/1.jpg)
+![original](./input/3.jpg)
 
 ## Threshold
 ![threshold_LAB_b](./output/3_thld_wb_LAB_b.jpg)
