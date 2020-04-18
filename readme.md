@@ -5,7 +5,7 @@
 ![CIELAB](./CIELAB.png)
 - The dead cells are stained in blue while the living cells remains green. 
 It is therfore possible to discimiate them based on theire b\* value. 
-- The user can chosse options: white balance ([original macro](https://github.com/pmascalchi/ImageJ_Auto-white-balance-correction)), whatersheding, scale and minimum area. 
+- The user can chose options: white balance ([original macro](https://github.com/pmascalchi/ImageJ_Auto-white-balance-correction)), whatersheding, scale and minimum area. 
 - Examples with Chlamydomonas cells. 
 
 ## Original
