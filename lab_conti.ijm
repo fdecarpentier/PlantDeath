@@ -26,7 +26,7 @@ whiteBalance = Dialog.getCheckbox();
 watershedLabel = ""; 
 if(watershed!=false) watershedLabel="_ws";
 whiteBalancelabel ="";
-if(whiteBalance!=false) whiteBalancelabel="wb_";
+if(whiteBalance!=false) whiteBalancelabel="_wb";
 
 //Choose what you need to measure
 run("Set Measurements...", "area mean min redirect=None decimal=4");
@@ -61,13 +61,13 @@ for(i=0; i<list.length; i++)
 		selectWindow(whiteBalancelabel+list[i]);
 		roiManager("Show All without labels"); 
 		run("Flatten");
-		saveAs("Jpeg", outputPath+method+watershedLabel+".jpg");
+		saveAs("Jpeg", outputPath+method+whiteBalancelabel+watershedLabel+".jpg");
 		roiManager("Delete"); //Clear the ROI manager
 		close("*"); //Close all images	
 	}
 	showProgress(i, list.length);  //Shows a progress bar  
 }
-saveAs("results", outputFolder+"results"+method+watershedLabel+ ".csv"); 
+saveAs("results", outputFolder+"results"+method+whiteBalancelabel+watershedLabel+ ".csv"); 
 closeWin("Results"); closeWin("ROI Manager");
 
 function getRoi()
@@ -111,7 +111,7 @@ function getMes()
 	}	
 	roiManager("Show All without labels"); //transfer the ROI
 	run("Flatten");
-	saveAs("Jpeg", outputPath+method+watershedLabel+"_LAB_b.jpg");
+	saveAs("Jpeg", outputPath+method+whiteBalancelabel+watershedLabel+"_LAB_b.jpg");
 }
 
 function autoWhite()
