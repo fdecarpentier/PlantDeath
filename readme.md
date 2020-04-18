@@ -2,7 +2,7 @@
 **IT ONLY WORKS WITH FIJI, NOT IMAGEJ**
 - This macros allows quantification of cell death in plants stained with Evans Blue.
 - It is based on the transformation from RGB to CIE L\*a\*b\* images. 
-![CIELAB](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/The_principle_of_the_CIELAB_colour_space.svg/862px-The_principle_of_the_CIELAB_colour_space.svg.png)
+![CIELAB](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/The_principle_of_the_CIELAB_colour_space.svg/269px-The_principle_of_the_CIELAB_colour_space.svg.png)
 - The dead cells are stained in blue while the living cells remains green. 
 It is therfore possible to discimiate them based on theire b\* value. 
 - The user can chose options: white balance ([original macro](https://github.com/pmascalchi/ImageJ_Auto-white-balance-correction)), whatersheding, scale and minimum area. 
