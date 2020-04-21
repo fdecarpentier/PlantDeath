@@ -136,21 +136,21 @@ function getMes()
 {
 	roiManager("Measure");
 	roiManager("Deselect");
-	roiManager("Set Color", "Red");  
+	roiManager("Set Line Width", 3);
+	roiManager("Set Color", "#B8293B"); //Overlay for dead particles
 	for (iRow = 0; iRow < nResults-currentNResults; iRow++)
 	{
 		meanParticle=getResult("Mean", iRow+currentNResults);
 		if (meanParticle>30)
 		{
 			roiManager("Select", iRow); 
-			roiManager("Set Color", "Green"); 
+			roiManager("Set Color", "#F5FB82"); //Overlay for living particles
 		}
 	}
 	roiManager("Show All without labels"); 
 	run("Flatten");
 	saveAs("Jpeg", outputPath+method+whiteBalancelabel+watershedLabel+"_LAB_b.jpg");
 }
-
 
 function autoWhite()
 {

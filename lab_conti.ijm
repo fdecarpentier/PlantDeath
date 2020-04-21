@@ -99,14 +99,15 @@ function getMes()
 {
 	roiManager("Measure");
 	roiManager("Deselect");
-	roiManager("Set Color", "red");
+	roiManager("Set Line Width", 3);
+	roiManager("Set Color", "#B8293B"); //Overlay for dead particles
 	for (iRow = 0; iRow < nResults-currentNResults; iRow++)
 	{
 		maxParticle=getResult("Max", iRow+currentNResults);
 		if (maxParticle>40)
 		{
 			roiManager("Select", iRow); 
-			roiManager("Set Color", "Green"); 
+			roiManager("Set Color", "#F5FB82"); //Overlay for living particles
 		}
 	}	
 	roiManager("Show All without labels"); //transfer the ROI
