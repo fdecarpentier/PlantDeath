@@ -1,8 +1,6 @@
 //Macro by Félix de Carpentier, 2020, CNRS / Sorbonne University / Paris-Saclay University, France
 //Inspired by Will Armour, 2018 (https://willarmour.science/how-to-automate-image-particle-analysis-by-creating-a-macro-in-imagej/)
 
-method="_thld"; //Used method
-
 //Choose directories and create a list of files
 inputFolder=getDirectory("Choose input folder");
 outputFolder=getDirectory("Choose output folder for the results");
@@ -22,7 +20,8 @@ minArea = Dialog.getNumber();
 watershed = Dialog.getCheckbox();
 whiteBalance = Dialog.getCheckbox();
 
-//Set a watershed and white balance labels for the output names
+//Set method, watershed and white balance labels for the output names
+method="_thld"; //Used method
 watershedLabel = ""; 
 if(watershed!=false) watershedLabel="_ws";
 whiteBalancelabel ="";
