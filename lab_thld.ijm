@@ -42,7 +42,7 @@ for(i=0; i<list.length; i++)
 	fileExtension=lastIndexOf(outputPath,"."); 
 	if(fileExtension!=-1) outputPath=substring(outputPath,0,fileExtension);
 	//Set scale according to user inputs
-	run("Set Scale...", "distance="+disPix+" known="+disKnown);
+	run("Set Scale...", "distance="+disPix+" known="+disKnown+" unit=µm");
 
 	if(nImages>=1)
 	{
